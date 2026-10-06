@@ -78,6 +78,12 @@ p { margin: 0; }
   background: rgba(255, 250, 242, 0.94);
   border-bottom: 1px solid var(--line);
 }
+/* 縦の短いスマホ（例：320×568）では、ヘッダーを出さない。
+   出すと、ファーストビューの「冒険をはじめる」が最初の画面からはみ出すため。
+   375×812 など、縦に余裕のある画面ではこれまでどおり表示する。 */
+@media (max-width: 767px) and (max-height: 650px) {
+  .site-header { display: none; }
+}
 .header-inner {
   display: flex;
   align-items: center;
