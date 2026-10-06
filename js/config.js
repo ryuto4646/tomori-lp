@@ -7,7 +7,7 @@
 window.TOMORI_CONFIG = {
 
   // デモのURL（例："https://example.com/demo/"）
-  demoUrl: "",
+  demoUrl: "https://ryuto4646.github.io/tomori/",
 
   // デモを新しいタブで開くか（true / false）
   demoOpenInNewTab: true,
