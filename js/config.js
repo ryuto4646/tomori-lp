@@ -9,8 +9,8 @@ window.TOMORI_CONFIG = {
   // デモのURL（例："https://example.com/demo/"）
   demoUrl: "https://ryuto4646.github.io/tomori/demo-world.html",
 
-  // デモを新しいタブで開くか（true / false）
-  demoOpenInNewTab: true,
+  // デモを新しいタブで開くか（true / false）。false＝同じタブで開く（スマホでアプリらしく進み、戻るで紹介ページへ戻れる）
+  demoOpenInNewTab: false,
 
   // ── 世界観を伝えるコンセプト画像（実際のアプリ画面ではない） ──
 
