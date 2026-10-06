@@ -125,48 +125,110 @@ p { margin: 0; }
   transform: none;
 }
 
-/* ---------- ① ファーストビュー ---------- */
-.hero { padding: 40px 0 56px; }
-.hero-inner {
-  display: grid;
-  gap: 32px;
-  align-items: center;
+/* ---------- ① ファーストビュー（ゲームのタイトル画面ふう） ---------- */
+/* 画像は切らない：object-fit は使わず、画像の比率のまま幅いっぱいに表示する */
+.game-front {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  overflow: hidden;
+  background: #dff3ff;
 }
-.status-label {
-  display: inline-block;
-  font-size: 0.8rem;
-  color: var(--ink-soft);
-  border: 1px solid var(--line);
+.game-front__stage { position: relative; }
+.game-front__picture,
+.game-front__image {
+  display: block;
+  width: 100%;
+}
+.game-front__image { height: auto; }
+
+/* 画像の中の緑のボタンに重ねる透明リンク（位置は画像に対する%）
+   PC用画像：ボタンは 72,432〜608,550px（1672×941） */
+.game-front__start-hitarea {
+  position: absolute;
+  left: 4.31%;
+  top: 45.91%;
+  width: 32.06%;
+  height: 12.54%;
   border-radius: 999px;
-  padding: 2px 12px;
-  margin-bottom: 16px;
-  background: #fff;
 }
-.hero-title {
-  font-size: clamp(1.75rem, 8vw, 3.4rem);
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  margin-bottom: 20px;
+/* スマホ用画像：ボタンは 150,1360〜790,1514px（941×1672）
+   ※ <picture> の切り替え条件（max-width: 767px）と必ずそろえる */
+@media (max-width: 767px) {
+  .game-front__start-hitarea {
+    left: 15.94%;
+    top: 81.34%;
+    width: 68.01%;
+    height: 9.21%;
+  }
 }
-.nowrap { white-space: nowrap; }
-.hero-lead {
+.game-front__start-hitarea:focus-visible {
+  outline: 4px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 7px var(--deep);
+}
+
+.game-front__note {
+  padding: 6px 16px 0;
+  font-size: 0.8125rem;
   color: var(--ink-soft);
-  margin-bottom: 28px;
-  max-width: 34em;
+  text-align: right;
+  background: var(--bg);
 }
 
-.hero-visual { margin: 0; }
-
-/* 世界観画像：スマホは16:9、PCは右側に大きく16:10。
-   ことばの樹と金色の道が切れないよう、画像の右寄りを中心に見せる */
-.frame-hero { --ratio: 16 / 9; --pos: 80% 50%; }
-
-@media (min-width: 880px) {
-  .hero { padding: 64px 0 80px; }
-  .hero-inner { grid-template-columns: 1fr 1.5fr; gap: 40px; }
-  .hero-title { font-size: clamp(2rem, 3.6vw, 2.75rem); }
-  .frame-hero { --ratio: 16 / 10; }
+/* 画像を読み込めなかったとき：見出しとボタンを、ふつうの文字で表示する */
+.game-front--fallback { padding: 48px 16px; text-align: center; }
+.game-front--fallback .game-front__picture { display: none; }
+.game-front--fallback .game-front__title {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0 0 24px;
+  clip: auto;
+  overflow: visible;
+  white-space: normal;
+  font-size: 1.75rem;
+  font-weight: 800;
 }
+.game-front--fallback .game-front__start-hitarea {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  min-height: 48px;
+  padding: 12px 28px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+.game-front--fallback .game-front__start-text {
+  position: static;
+  width: auto;
+  height: auto;
+  clip: auto;
+  overflow: visible;
+  white-space: normal;
+}
+.game-front--fallback .game-front__note { background: none; text-align: center; }
+
+/* 画面には出さず、読み上げソフトだけに伝える文字 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.nowrap { white-space: nowrap; }
 
 /* 「コンセプトビジュアル」の小さな注記（画像の下・右端。13px以上） */
 .concept-note {

@@ -14,12 +14,13 @@ window.TOMORI_CONFIG = {
 
   // ── 世界観を伝えるコンセプト画像（実際のアプリ画面ではない） ──
 
-  // ファーストビュー（PCは右側、スマホはコピーの下に16:9で表示）
-  hero: {
-    src: "images/tomori-lp-hero.webp",
-    alt: "金色の道が、光る実をつけたことばの樹へ続く、朝のTOMORIの世界",
-    // 画像のどこを中心に見せるか（横 縦）。ことばの樹と金色の道が切れないよう右寄り
-    position: "80% 50%"
+  // ファーストビュー（ゲームのタイトル画面ふうの画像）
+  // PC用は横長、スマホ用（画面幅767px以下）は縦長。切り取らずに表示する。
+  // ※ 画像を作り直して、緑のボタンの位置が変わったときは、
+  //   css/style.css の .game-front__start-hitarea の数値も直すこと。
+  gameFront: {
+    desktop: "images/tomori-game-front-desktop.webp",
+    mobile: "images/tomori-game-front-mobile.webp"
   },
 
   // 「言葉にすると、世界が変わる」セクション

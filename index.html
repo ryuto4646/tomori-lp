@@ -38,27 +38,45 @@
 
   <main id="main">
 
-    <!-- ① ファーストビュー -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <p class="status-label">開発中のプロトタイプ</p>
-          <h1 id="hero-title" class="hero-title"><span class="nowrap">気になったことが、</span><br><span class="nowrap">冒険になる。</span></h1>
-          <p class="hero-lead">TOMORIは、子どもが見つけたものを写真に撮り、感じたことを言葉にしながら、自分だけの世界をひらいていく探究体験です。</p>
-          <a class="btn btn-primary" href="#demo">デモへ進む</a>
-        </div>
-        <!-- 世界観のコンセプト画像。js/config.js の hero で差し替える -->
-        <figure class="hero-visual" data-slot="hero">
-          <div class="frame frame-hero"></div>
-          <figcaption class="concept-note">コンセプトビジュアル</figcaption>
-        </figure>
+    <!-- ① ファーストビュー（ゲームのタイトル画面ふうの画像）
+         ロゴ・キャッチ・ボタン・「開発中のプロトタイプ」は画像に描かれているので、HTMLでは重ねない。
+         PC用（横長）とスマホ用（縦長）を画面幅 767px で切り替える。
+         画像ファイル名は js/config.js の gameFront で変えられる（ここに書いた名前は初期値）。 -->
+    <section class="game-front" id="game-front" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="sr-only game-front__title">TOMORI　ことばで、世界がひらく。</h1>
+      <div class="game-front__stage">
+        <picture class="game-front__picture">
+          <source
+            media="(max-width: 767px)"
+            srcset="images/tomori-game-front-mobile.webp"
+            width="941"
+            height="1672"
+          >
+          <img
+            src="images/tomori-game-front-desktop.webp"
+            alt="ことばで世界がひらくTOMORI。ヒロリと光ることばのタネ、ことばの樹が描かれた冒険の入口"
+            class="game-front__image"
+            width="1672"
+            height="941"
+            fetchpriority="high"
+            decoding="async"
+          >
+        </picture>
+        <!-- 画像の中の緑のボタンにだけ重ねる、透明な本物のリンク。
+             デモURLが未設定のあいだは、下の「TOMORIを体験してみる」へ移動する。 -->
+        <a class="game-front__start-hitarea" id="front-start" href="#demo" aria-label="TOMORIの冒険をはじめる">
+          <span class="sr-only game-front__start-text">冒険をはじめる</span>
+        </a>
       </div>
+      <p class="game-front__note">コンセプトビジュアル（開発中）</p>
     </section>
 
     <!-- ② TOMORIとは -->
     <section class="section" id="about" aria-labelledby="about-title">
       <div class="container narrow">
         <h2 id="about-title" class="section-title">TOMORIとは</h2>
+        <!-- 旧ファーストビューの説明文（確定文）を、ここへ移した -->
+        <p class="about-text">TOMORIは、子どもが見つけたものを写真に撮り、感じたことを言葉にしながら、自分だけの世界をひらいていく探究体験です。</p>
         <p class="about-text">道ばたの石、空の色、ふと目にとまった形。写真に撮った一枚から言葉が生まれます。その言葉で、冒険の世界が動きだします。</p>
         <p class="about-accent">正解は、ひとつじゃない。<br>見つけ方も、感じ方も、その子らしさです。</p>
       </div>

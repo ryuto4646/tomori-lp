@@ -28,14 +28,33 @@
     frame.classList.add("has-image");
   }
 
-  // コンセプト画像（ファーストビュー・ことばのタネ）
-  [["hero", config.hero], ["seed", config.seed]].forEach(function (pair) {
-    var frame = document.querySelector('[data-slot="' + pair[0] + '"] .frame');
-    if (!frame) return;
-    loadImage(pair[1], function (img) {
-      if (img) putImage(frame, pair[1], img);
+  // ファーストビュー（ゲームのタイトル画面ふう）
+  var front = document.getElementById("game-front");
+  var frontImg = front && front.querySelector(".game-front__image");
+  var frontSource = front && front.querySelector("source");
+  if (frontImg) {
+    // 画像を読み込めなかったら、見出しとボタンをふつうの文字で出す
+    var useFallback = function () { front.classList.add("game-front--fallback"); };
+    frontImg.addEventListener("error", useFallback);
+    if (frontImg.complete && frontImg.naturalWidth === 0) useFallback();
+
+    // config.js で別の画像名が指定されていれば、それに差し替える
+    var gf = config.gameFront || {};
+    if (gf.mobile && frontSource && frontSource.getAttribute("srcset") !== gf.mobile) {
+      frontSource.setAttribute("srcset", gf.mobile);
+    }
+    if (gf.desktop && frontImg.getAttribute("src") !== gf.desktop) {
+      frontImg.setAttribute("src", gf.desktop);
+    }
+  }
+
+  // ことばのタネ（コンセプト画像）
+  var seedFrame = document.querySelector('[data-slot="seed"] .frame');
+  if (seedFrame) {
+    loadImage(config.seed, function (img) {
+      if (img) putImage(seedFrame, config.seed, img);
     });
-  });
+  }
 
   // 実際のアプリ画面：読み込めた画像だけでカードを作る
   var section = document.getElementById("screens");
@@ -93,5 +112,17 @@
       link.setAttribute("aria-label", "デモを体験する（新しいタブで開きます）");
     }
     if (note) note.hidden = true;
+  }
+
+  // ファーストビューの「冒険をはじめる」
+  // デモURLがあればデモへ。無いあいだは #demo（ページ内）のまま。
+  var start = document.getElementById("front-start");
+  if (start && config.demoUrl) {
+    start.href = config.demoUrl;
+    if (config.demoOpenInNewTab) {
+      start.target = "_blank";
+      start.rel = "noopener";
+      start.setAttribute("aria-label", "TOMORIの冒険をはじめる（新しいタブで開きます）");
+    }
   }
 })();
