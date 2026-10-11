@@ -14,7 +14,7 @@ window.TOMORI_CONFIG = {
 
   // 遊んだ感想のアンケート（Google フォームなど）の URL。空 "" のあいだは、ページに出さない
   // 名前・メールアドレスを集めず、ログインなしで答えられる設定のフォームだけを入れること
-  surveyUrl: "",
+  surveyUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfPFYxsqGf8qlJWpD9UlWaf7MaOqb8aOKqdlpVOn7srnzi_kw/viewform",
 
   // ── 世界観を伝えるコンセプト画像（実際のアプリ画面ではない） ──
 
