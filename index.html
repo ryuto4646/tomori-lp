@@ -46,7 +46,7 @@
       <div class="game-front__stage">
         <picture class="game-front__picture">
           <source
-            media="(max-width: 767px)"
+            media="(max-width: 767px) and (orientation: portrait)"
             srcset="images/tomori-game-front-mobile.webp"
             width="941"
             height="1672"
@@ -67,6 +67,11 @@
           <span class="sr-only game-front__start-text">冒険をはじめる</span>
         </a>
       </div>
+      <!-- スマホ（と横向きのスマホ）だけ：下に紹介文があることを知らせる案内。メイン画像のすぐ下に置き、画像には重ねない -->
+      <a class="scroll-hint" id="scroll-hint" href="#about">
+        <span class="scroll-hint__arrow" aria-hidden="true">↓</span>
+        <span class="scroll-hint__text">TOMORIって？ 下へ</span>
+      </a>
       <p class="game-front__note">コンセプトビジュアル（開発中）</p>
     </section>
 
@@ -171,6 +176,12 @@
         <!-- デモURLは js/config.js の demoUrl で差し替える。未設定のあいだは「準備中」表示になる -->
         <a class="btn btn-primary btn-large" id="demo-link" data-slot="demo" aria-disabled="true">デモは準備中です</a>
         <p class="cta-note" id="demo-note">デモの公開準備を進めています。</p>
+        <!-- 遊んだ感想のアンケート。URL は js/config.js の surveyUrl。空のあいだは表示しない -->
+        <div class="survey" id="survey" hidden>
+          <p class="survey-title">遊んだ感想を教えてください</p>
+          <a class="btn btn-survey" id="survey-link" href="#">アンケートに答える</a>
+          <p class="survey-note">ログインなしで答えられます。名前やメールアドレスは聞きません。</p>
+        </div>
       </div>
     </section>
 

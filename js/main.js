@@ -114,6 +114,36 @@
     if (note) note.hidden = true;
   }
 
+  // 遊んだ感想のアンケート（URL があるときだけ出す。新しいタブで開く）
+  var survey = document.getElementById("survey");
+  var surveyLink = document.getElementById("survey-link");
+  if (survey && surveyLink && config.surveyUrl) {
+    surveyLink.href = config.surveyUrl;
+    surveyLink.target = "_blank";
+    surveyLink.rel = "noopener";
+    surveyLink.setAttribute("aria-label", "アンケートに答える（新しいタブで開きます）");
+    survey.hidden = false;
+  }
+
+  // 「TOMORIって？ 下へ」：紹介文の見出しが見えたら隠し、いちばん上へ戻ったら再び出す
+  var hint = document.getElementById("scroll-hint");
+  var aboutTitle = document.getElementById("about-title");
+  if (hint && aboutTitle) {
+    var hidden = false;
+    var update = function () {
+      if (window.scrollY <= 8) hidden = false;           // いちばん上へ戻ったら、また出す
+      hint.classList.toggle("scroll-hint--hidden", hidden);
+    };
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) hidden = true;     // 紹介文の見出しが見えたら隠す
+        update();
+      }).observe(aboutTitle);
+    }
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  }
+
   // ファーストビューの「冒険をはじめる」
   // デモURLがあればデモへ。無いあいだは #demo（ページ内）のまま。
   var start = document.getElementById("front-start");
